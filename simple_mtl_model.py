@@ -1,3 +1,7 @@
+# Just a simple MTL model with shared backbone and task-specific heads
+# We have two Linear layers with ReLU activations as the shared backbone
+# Each task has its own Linear layer as the task-specific head
+
 import torch
 import torch.nn as nn
 
@@ -17,9 +21,6 @@ class SimpleMTLModel(nn.Module):
         )
 
         # task specific heads - each task gets its own specific head to predict its specific value
-        #self.heads = nn.ModuleList([
-        #    nn.Linear(hidden_dim, 1) for _ in range(num_tasks)
-        #])
 
         self.heads = nn.ModuleList()
 
@@ -35,7 +36,7 @@ class SimpleMTLModel(nn.Module):
         shared_rep = self.backbone(x)
 
         outputs = [] # individual task outputs
-        
+
 
         for task in range(self.num_tasks):
             task_output = self.heads[task](shared_rep)
