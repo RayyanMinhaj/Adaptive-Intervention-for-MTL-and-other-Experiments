@@ -21,7 +21,7 @@ class AIMPolicy(nn.Module):
 
     
 
-    def get_intervened_gradients(self, raw_task_gradients):
+    def get_intervened_gradient(self, raw_task_gradients):
         # input is the list of gradient tensors for each task [g1, g2, g3....]
         # output is the final summed gradient vector g_intervened
 
